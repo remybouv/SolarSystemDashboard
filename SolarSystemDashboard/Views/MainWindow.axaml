@@ -1,0 +1,104 @@
+<Window
+    x:Class="SolarSystemDashboard.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:SolarSystemDashboard.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:SolarSystemDashboard.ViewModels"
+    Title="SolarSystemDashboard"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid
+        Margin="20"
+        ColumnDefinitions="*,auto"
+        RowDefinitions="*,*">
+
+        <Grid
+            Grid.Row="0"
+            Grid.Column="1"
+            IsVisible="{Binding CurrentBody, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <Image
+                Opacity="0.3"
+                Source="avares://SolarSystemDashboard/Assets/Images/2k_stars_milky_way.jpg"
+                Stretch="UniformToFill" />
+            <controls:Planet3DControl
+                PlanetSize="{Binding CurrentDisplaySize}"
+                RotationSpeed="{Binding CurrentPlanetConfig.RotationSpeed}"
+                ShowRings="{Binding CurrentPlanetConfig.ShowRings}"
+                TexturePath="{Binding CurrentPlanetConfig.TexturePath}" />
+        </Grid>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding CurrentBody, Converter={x:Static ObjectConverters.IsNotNull}}">
+            <TextBlock
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                FontSize="24"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="{Binding CurrentBody.EnglishName}" />
+
+            <TextBlock
+                Margin="0,5,0,0"
+                HorizontalAlignment="Center"
+                FontSize="14"
+                Foreground="#94a3b8"
+                Text="{Binding CurrentBody.BodyType}" />
+
+            <Button
+                Grid.Column="0"
+                Margin="0,0,20,0"
+                Padding="30,12"
+                HorizontalAlignment="Right"
+                Command="{Binding PreviousBodyCommand}"
+                Content="◄ Previous"
+                FontSize="16" />
+
+            <Grid
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                IsVisible="{Binding HasBodies}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="1"
+                    Padding="20,10"
+                    Background="#1e3a8a"
+                    CornerRadius="5">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="{Binding BodyCounter}" />
+                </Border>
+
+                <Button
+                    Grid.Column="2"
+                    Margin="20,0,0,0"
+                    Padding="30,12"
+                    HorizontalAlignment="Left"
+                    Command="{Binding NextBodyCommand}"
+                    Content="Next ►"
+                    FontSize="16" />
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+
+</Window>

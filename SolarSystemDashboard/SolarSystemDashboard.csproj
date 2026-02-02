@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<None Update="Resources\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.9" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.9" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.9" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.9" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.9">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="HelixToolkit" Version="3.1.2" />
+    <PackageReference Include="HelixToolkit.Avalonia.SharpDX" Version="3.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
+    <PackageReference Include="SukiUI" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\Planet3DControl.axaml.cs">
+      <DependentUpon>Planet3DControl.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

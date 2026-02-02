@@ -1,0 +1,12 @@
+<UserControl
+    x:Class="SolarSystemDashboard.Controls.Planet3DControl"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="400"
+    Height="400">
+    <Canvas x:Name="PlanetCanvas" Background="Transparent">
+        <Canvas.RenderTransform>
+            <TranslateTransform X="200" Y="200" />
+        </Canvas.RenderTransform>
+    </Canvas>
+</UserControl>
