@@ -24,7 +24,7 @@ Implémentation d'un système robuste de gestion automatique des tokens pour l'A
 ## 🔄 Modifications
 
 ### BodiesService.cs
-- ❌ Suppression du token hardcodé `"a2becb0c-4476-42fc-b92c-a58974c4094c"`
+- ❌ Suppression du token hardcodé
 - ✅ Injection de `ITokenService` via constructeur
 - ✅ Gestion automatique des erreurs 401 avec retry logic
 - ✅ Logging approprié pour le debugging
